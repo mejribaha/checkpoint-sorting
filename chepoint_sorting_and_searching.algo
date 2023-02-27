@@ -1,0 +1,55 @@
+FUNCTION read_size () : INTEGER
+VAR
+    n : INTEGER;
+BEGIN
+    REPEAT
+        Write ("Give a valid size positive and less than 100");
+        Read (n);
+    UNTIL (n >0 and n<100);
+    RETURN n ;
+END
+
+PROCEDURE read_tab (n:INTEGER, VAR tab:ARRAY_OF INTEGER)
+VAR
+    i: INTEGER;
+BEGIN
+    FOR i FROM 0 TO n-1  DO
+        Read(tab[i]);
+    END_FOR
+END
+
+PROCEDURE tri_insertion (VAR tab: ARRAY_OF INTEGER, n: INTEGER)
+VAR
+    i, j, elt : INTEGER;
+BEGIN
+    FOR i FROM 2 TO n STEP 1  DO
+        elt = tab[i];
+        j:= i;
+        WHILE (tab[j] > elt) DO
+            tab[j] := tab[j-1];
+            j:= j-1;
+        END_WHILE
+        tab[j]:= elt;
+    END_FOR
+END
+PROCEDURE affichage (tab: ARRAY_OF INTEGER, n: INTEGER)
+VAR
+    i : INTEGER;
+BEGIN
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        Write ("The new array: ", tab[i]);
+    END_FOR
+
+ALGORITHM sort_insertion
+VAR
+    Tab  : ARRAY_OF INTEGER[n];
+    n : INTEGER;
+BEGIN
+    n:= read_size();
+
+    read_tab(n, Tab);
+
+    tri_insertion(Tab, n);
+
+    affichage(Tab, n);
+END
